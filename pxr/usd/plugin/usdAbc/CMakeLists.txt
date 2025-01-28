@@ -130,6 +130,11 @@ pxr_install_test_dir(
 )
 
 pxr_install_test_dir(
+    SRC testenv/testUsdAbcIndexedGeomArbLoad
+    DEST testUsdAbcIndexedGeomArbLoad
+)
+
+pxr_install_test_dir(
     SRC testenv/testUsdAbcInstancing
     DEST testUsdAbcInstancing
 )
@@ -229,6 +234,14 @@ pxr_register_test(testUsdAbcIndexedProperties
 pxr_register_test(testUsdAbcIndexedGeomArb
     COMMAND "${CMAKE_INSTALL_PREFIX}/bin/usdcat hasColorSet.abc --out good_primvars_namespace_after_fix.usda"
     DIFF_COMPARE good_primvars_namespace_after_fix.usda
+    EXPECTED_RETURN_CODE 0
+    ENV
+        USD_ABC_TESTSUFFIX=def
+)
+
+pxr_register_test(testUsdAbcIndexedGeomArbLoad
+    COMMAND "${CMAKE_INSTALL_PREFIX}/bin/usdcat test_indexed_primvar.abc --out good_indexed_primvar.usda"
+    DIFF_COMPARE good_indexed_primvar.usda
     EXPECTED_RETURN_CODE 0
     ENV
         USD_ABC_TESTSUFFIX=def
